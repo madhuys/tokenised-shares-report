@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TL;DR and GPT comparison · Tokenised shares</title><style>@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/BricolageGrotesque-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/BricolageGrotesque-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("fonts/Manrope-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("fonts/Manrope-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+/* design direction: swiss (measured, forensic, civic; mineral slate and copper tracing the movement of household capital) - written from design/style.json */
+:root {
+  --bg: #F5F6F7;
+  --surface: #E8E9EA;
+  --text: #191D1F;
+  --muted: #686B6D;
+  --primary: #344B5A;
+  --primary-text: #344B5A;
+  --on-primary: #FFFFFF;
+  --secondary: #B56A45;
+  --accent: #6F8B83;
+  --chart-1: #344B5A;
+  --chart-2: #B56A45;
+  --chart-3: #6F8B83;
+  --chart-4: #D3A84F;
+  --radius: 2px;
+  --font-heading: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.66; }
+a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--secondary); }
+.cover { background: #fff; border-bottom: 1px solid #dfe2e3; }
+.cover-inner { width: min(1180px, calc(100% - 48px)); margin: auto; padding: 68px 0 54px; }
+.kicker { color: var(--secondary); text-transform: uppercase; letter-spacing: .16em; font-weight: 700; font-size: 12px; margin: 0 0 22px; }
+.cover h1 { font-family: var(--font-heading); font-size: clamp(42px, 5.6vw, 74px); line-height: 1.02; letter-spacing: -.035em; max-width: 1020px; margin: 0 0 24px; }
+.subtitle { font-size: 20px; max-width: 760px; color: var(--muted); margin: 0 0 32px; }
+.meta { display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 13px; color: var(--muted); margin-bottom: 30px; }
+.downloads { display: flex; flex-wrap: wrap; gap: 10px; }
+.downloads a { display: inline-block; padding: 10px 16px; border: 1px solid var(--primary); border-radius: 2px; text-decoration: none; font-weight: 700; font-size: 13px; }
+.downloads a:first-child { background: var(--primary); color: #fff; }
+.downloads a:first-child:hover { background: var(--secondary); border-color: var(--secondary); }
+.nav { position: sticky; top: 0; z-index: 5; background: rgba(245,246,247,.96); backdrop-filter: blur(10px); border-bottom: 1px solid #dfe2e3; }
+.nav-inner { width: min(1180px, calc(100% - 48px)); margin: auto; display: flex; gap: 24px; overflow-x: auto; padding: 13px 0; white-space: nowrap; }
+.nav a { text-decoration: none; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+.report { width: min(1120px, calc(100% - 48px)); margin: 40px auto 64px; }
+.report h2 { font-family: var(--font-heading); font-size: 32px; line-height: 1.16; letter-spacing: -.015em; margin: 58px 0 20px; padding-top: 12px; border-top: 1px solid #cfd4d6; }
+.report h2:first-child { margin-top: 0; }
+.report h3 { font-family: var(--font-heading); font-size: 21px; margin: 34px 0 10px; }
+.report p { max-width: 860px; margin: 0 0 17px; }
+.report strong { font-weight: 700; }
+.report table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; background: #fff; font-size: 13px; line-height: 1.52; }
+.report th { background: var(--primary); color: #fff; text-align: left; font-family: var(--font-heading); font-size: 13px; }
+.report th, .report td { padding: 14px 15px; border: 1px solid #d9dddf; vertical-align: top; }
+.report tr:nth-child(even) td { background: #f0f2f3; }
+.report ol { max-width: 880px; padding-left: 25px; }
+.report li { margin-bottom: 12px; padding-left: 5px; }
+.report img { display: block; width: 100%; max-width: 1050px; height: auto; margin: 28px auto 12px; border: 1px solid #d9dddf; background: #fff; }
+.report p em { color: var(--muted); }
+a.cite { display: inline-block; font-size: 11px; line-height: 1.4; padding: 1px 4px; margin: 0 1px; border-radius: 2px; background: #e4e9eb; color: var(--primary); text-decoration: none; font-weight: 700; vertical-align: baseline; }
+a.cite:hover { background: var(--secondary); color: #fff; }
+#source-register ~ ul { max-width: 1000px; }
+#source-register ~ ul li { font-size: 13px; color: var(--muted); }
+.footer { border-top: 1px solid #d9dddf; padding: 24px; text-align: center; font-size: 12px; color: var(--muted); background: #fff; }
+@media (max-width: 720px) {
+  .cover-inner, .nav-inner, .report { width: min(100% - 30px, 1120px); }
+  .cover-inner { padding: 44px 0 36px; }
+  .cover h1 { font-size: 42px; }
+  .subtitle { font-size: 17px; }
+  .report { margin-top: 28px; }
+  .report h2 { font-size: 27px; margin-top: 44px; }
+  .report table { display: block; overflow-x: auto; font-size: 12px; }
+  .report th, .report td { min-width: 150px; padding: 11px; }
+}
+@media print {
+  @page { size: A4; margin: 17mm 15mm 18mm; @bottom-center { content: "Tokenised shares and emerging-economy savings  ·  " counter(page); font-family: Manrope, sans-serif; font-size: 8pt; color: #686B6D; } }
+  body { background: #fff; font-size: 9.4pt; line-height: 1.45; }
+  .cover { min-height: 245mm; display: flex; align-items: center; border: 0; page-break-after: always; }
+  .cover-inner { width: 100%; padding: 0; }
+  .cover h1 { font-size: 37pt; max-width: 170mm; }
+  .subtitle { font-size: 15pt; }
+  .nav, .downloads, .footer { display: none; }
+  .report { width: 100%; margin: 0; }
+  .report h2 { font-size: 19pt; margin: 9mm 0 4mm; page-break-after: avoid; }
+  .report h2:first-child { margin-top: 0; }
+  .report h3 { font-size: 13pt; page-break-after: avoid; }
+  .report p, .report ol { max-width: none; }
+  .report table { font-size: 7.6pt; page-break-inside: auto; }
+  .report tr { page-break-inside: avoid; }
+  .report th, .report td { padding: 7px 8px; }
+  .report img { max-width: 100%; page-break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+  a.cite { font-size: 7pt; background: #edf0f1; }
+}
+</style></head>
+<body><header class="cover"><div class="cover-inner"><p class="kicker">Tokenised shares and emerging-economy savings</p>
+<h1>TL;DR and GPT comparison</h1><p class="subtitle">The reviewed hypothesis in five bullets, plus where it differs from the earlier draft.</p>
+<div class="downloads"><a href="index.html">Back to the full report</a><a href="tokenised_shares_and_emerging_economy_savings.pdf">Download PDF</a></div></div></header>
+<main class="report"><h1 id="tldr-and-comparison-with-the-earlier-gpt-version">TL;DR and comparison with the earlier GPT version</h1>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li><strong>No demonstrated capital drain.</strong> Official assessments still describe tokenisation as small and limited in use cases <a class="cite" href="https://www.iosco.org/library/pubdocs/pdf/IOSCOPD809.pdf" target="_blank" rel="noopener">[s57841]</a> <a class="cite" href="https://www.fsb.org/2024/10/the-financial-stability-implications-of-tokenisation/" target="_blank" rel="noopener">[s58280]</a>. A future drain is possible if tokenised foreign shares induce additional, sustained household outflows—not merely a change of trading venue.</li>
+<li><strong>Secondary trading does not directly finance a foreign issuer.</strong> Buying an existing share pays its seller. Domestic harm would have to travel through local equity demand, liquidity, bank funding, exchange rates or reduced new issuance. That full chain has not been measured.</li>
+<li><strong>Diversification is the real potential saver benefit.</strong> Fractional access can help small balances spread risk, but token-specific net returns, costs, liquidity and diversification outcomes remain unproven. Foreign-currency exposure can cushion domestic depreciation; it can also create losses when exchange rates move the other way.</li>
+<li><strong>Distribution is the sharper concern.</strong> Households with surplus income, knowledge and loss buffers are positioned to gain first. India’s 24% / 5% / 2% participation gradient across NCCS A / B / C/D/E illustrates the unequal starting point <a class="cite" href="https://www.sebi.gov.in/sebi_data/commondocs/jan-2026/Investor%20Survey%202025%20Main%20Report.pdf" target="_blank" rel="noopener">[s59116]</a>. Token ownership by income has not been measured.</li>
+<li><strong>Democratise outcomes, not just access.</strong> Use a bounded pilot to regulate diversified foreign products and domestic tokenised issuance together. Require clear legal title, custody protection, total-cost and FX disclosure, suitability, redemption testing and income-band outcome reporting. Do not make unrestricted offshore wrappers the default mass-savings channel.</li>
+</ul>
+<h2 id="adversarial-comparison">Adversarial comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Earlier GPT version</th>
+<th>Reviewed conclusion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>H1 — capital drain</strong></td>
+<td>Long-run reallocation is possible; the concern is legitimate.</td>
+<td><strong>Same core hypothesis, tighter test.</strong> No current economy-wide effect is established. A valid claim must show additional outflows and a transmission path to domestic credit or new issuance. Trading volume and saving–investment correlations do not prove it.</td>
+</tr>
+<tr>
+<td><strong>H2 — saver diversification</strong></td>
+<td>Fractional foreign access can hedge domestic currency and market risk.</td>
+<td><strong>Potential, not an established token outcome.</strong> Conventional fractional-trading evidence supports access, not tokenised net returns. FX is two-sided; a foreign share combines equity and currency risk. Continuous trading does not guarantee liquidity.</td>
+</tr>
+<tr>
+<td><strong>H3 — democratisation</strong></td>
+<td>Open access can democratise global investment.</td>
+<td><strong>Access democratisation is insufficient.</strong> Rights, product design and distribution determine outcomes. Unrestricted wrappers may democratise exposure while concentrating platform rents and household losses. Regulated diversified products and local issuance are preferable.</td>
+</tr>
+<tr>
+<td><strong>What the earlier version missed</strong></td>
+<td>Distribution was largely treated as a secondary inclusion benefit.</td>
+<td><strong>Distribution and platform capture are central.</strong> Poorer households face constraints that fractional tickets cannot solve. The right success metric is resilient household balance sheets and productive local investment—not holder counts or turnover.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bottom line:</strong> the earlier version’s main hypothesis was not wrong, but it was too generous to access-led democratisation. The reviewed report keeps its diversification insight, rejects unsupported capital-flight claims and places legal rights, distributional outcomes and measurable policy tests at the centre.</p></main><footer class="footer">Evidence current to 17 November 2026</footer></body></html>
