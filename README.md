@@ -1,3 +1,3 @@
-# Tokenised shares report
+# Moved
 
-Policy brief: tokenised shares and emerging-economy savings (HTML, PDF, DOCX)
+The report lives at https://madhuys.github.io/tokenised-shares-emerging-economy-savings/
